@@ -24,13 +24,22 @@ type Transaction struct {
 	Category string `json:"category"`
 }
 
+func (self Report) Update(transaction Transaction) {
+	if self[transaction.UserId] == nil {
+		self[transaction.UserId] = make(ReportRow)
+	}
+	self[transaction.UserId]["sum"] += transaction.Amount
+	self[transaction.UserId]["user_id"] = transaction.UserId
+	self[transaction.UserId]["category_"+transaction.Category] += transaction.Amount
+}
+
 // -----------------------------------------------------------------------------
 // Utils
 // -----------------------------------------------------------------------------
 var start = time.Now()
 var helpArg = flag.Bool("h", false, "Print help and exit")
 var algoArg = flag.String("a", "naive", "Algorithm to use: naive, stream")
-var inputArg = flag.String("i", "input/10M.json", "Path to the input file")
+var inputArg = flag.String("i", "input/10K_transactions.json", "Path to the input file")
 var outputArg = flag.String("o", "output/report.json", "Path to the output file")
 var formatArg = flag.String("f", "json", "Report format: json, csv, sqlite")
 var quietArg = flag.Bool("q", false, "Disable logs output")

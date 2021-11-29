@@ -39,13 +39,7 @@ func (self ReportGeneratorNaive) Generate(fp *os.File) (Report, error) {
 
 	report := make(Report)
 	for i := 0; i < len(transactions); i++ {
-		transaction := transactions[i]
-		if report[transaction.UserId] == nil {
-			report[transaction.UserId] = make(ReportRow)
-		}
-		report[transaction.UserId]["sum"] += transaction.Amount
-		report[transaction.UserId]["user_id"] = transaction.UserId
-		report[transaction.UserId]["category_"+transaction.Category] += transaction.Amount
+		report.Update(transactions[i])
 	}
 
 	return report, nil
@@ -76,14 +70,7 @@ func (self ReportGeneratorStream) Generate(fp *os.File) (Report, error) {
 		if err != nil {
 			return nil, err
 		}
-
-		if report[transaction.UserId] == nil {
-			report[transaction.UserId] = make(ReportRow)
-		}
-
-		report[transaction.UserId]["sum"] += transaction.Amount
-		report[transaction.UserId]["user_id"] = transaction.UserId
-		report[transaction.UserId]["category_"+transaction.Category] += transaction.Amount
+		report.Update(transaction)
 	}
 
 	token, err = decoder.Token()

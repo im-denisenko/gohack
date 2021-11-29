@@ -92,6 +92,8 @@ type ReportWriterSQLite struct {
 }
 
 func (self ReportWriterSQLite) Write(report Report, outputPath string) error {
+	os.Remove(outputPath)
+
 	db, err := sql.Open("sqlite3", outputPath)
 
 	if err != nil {
@@ -101,10 +103,6 @@ func (self ReportWriterSQLite) Write(report Report, outputPath string) error {
 	defer db.Close()
 
 	_, err = db.Exec(`
-		DROP TABLE IF EXISTS users_report;
-
-		DROP TABLE IF EXISTS users_categories_report;
-
 		CREATE TABLE users_report (
 			id INT NOT NULL,
 			sum INT NOT NULL,
