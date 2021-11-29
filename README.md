@@ -1,9 +1,17 @@
 # GoHack
 
+# Установка
+
+```
+curl -sLO https://github.com/im-denisenko/gohack/releases/download/v1.0.0/gohack-v1.0.0
+chmod 755 gohack-v1.0.0
+sudo mv gohack-v1.0.0 /usr/local/bin/gohack
+```
+
 # Использование
 
 ```
-go run main.go
+gohack -i input.json -o output.json -f json -a naive
 ```
 
 # Флаги
