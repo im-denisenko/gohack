@@ -13,7 +13,14 @@ sudo mv gohack-v1.0.1 /usr/local/bin/gohack
 # Использование
 
 ```
+# Level 1
+gohack -i input.json -o /dev/stdout -f json -a naive
+
+# Level 2
 gohack -i input.json -o output.json -f json -a naive
+
+# Level 3
+gohack -i input.json -o output.csv -f csv -a naive
 ```
 
 # Флаги
