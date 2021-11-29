@@ -105,13 +105,14 @@ func (self ReportGeneratorStream) Generate(fp *os.File) Report {
 // -----------------------------------------------------------------------------
 // CreateReportGenerator
 // -----------------------------------------------------------------------------
-func CreateReportGenerator(format string) ReportGenerator {
-	if "naive" == format {
+func CreateReportGenerator(algorithm string) ReportGenerator {
+	if "naive" == algorithm {
 		return new(ReportGeneratorNaive)
 	}
-	if "stream" == format {
+	if "stream" == algorithm {
 		return new(ReportGeneratorStream)
 	}
+	Check(errors.New("unknown algorithm: " + algorithm))
 	return nil
 }
 
@@ -189,6 +190,7 @@ func CreateReportFormatter(format string) ReportFormatter {
 	if "json" == format {
 		return new(ReportFormatterJSON)
 	}
+	Check(errors.New("unknown format: " + format))
 	return nil
 }
 
