@@ -39,7 +39,6 @@ type ReportGenerator interface {
 // ReportGeneratorNaive
 // -----------------------------------------------------------------------------
 type ReportGeneratorNaive struct {
-
 }
 
 func (self ReportGeneratorNaive) Generate(fp *os.File) Report {
@@ -58,7 +57,7 @@ func (self ReportGeneratorNaive) Generate(fp *os.File) Report {
 		}
 		report[transaction.UserId]["sum"] += transaction.Amount
 		report[transaction.UserId]["user_id"] = transaction.UserId
-		report[transaction.UserId]["category_" + transaction.Category] += transaction.Amount
+		report[transaction.UserId]["category_"+transaction.Category] += transaction.Amount
 	}
 
 	return report
@@ -69,7 +68,6 @@ func (self ReportGeneratorNaive) Generate(fp *os.File) Report {
 // ReportGeneratorStream
 // -----------------------------------------------------------------------------
 type ReportGeneratorStream struct {
-
 }
 
 func (self ReportGeneratorStream) Generate(fp *os.File) Report {
@@ -92,7 +90,7 @@ func (self ReportGeneratorStream) Generate(fp *os.File) Report {
 
 		report[transaction.UserId]["sum"] += transaction.Amount
 		report[transaction.UserId]["user_id"] = transaction.UserId
-		report[transaction.UserId]["category_" + transaction.Category] += transaction.Amount
+		report[transaction.UserId]["category_"+transaction.Category] += transaction.Amount
 	}
 
 	token, err = decoder.Token()
@@ -128,12 +126,11 @@ type ReportFormatter interface {
 // ReportFormatterCSV
 // -----------------------------------------------------------------------------
 type ReportFormatterCSV struct {
-
 }
 
 func (self ReportFormatterCSV) Format(report Report) string {
-    b := new(bytes.Buffer)
-    w := csv.NewWriter(b)
+	b := new(bytes.Buffer)
+	w := csv.NewWriter(b)
 
 	headersMap := make(map[string]bool)
 
@@ -170,7 +167,6 @@ func (self ReportFormatterCSV) Format(report Report) string {
 // ReportFormatterJSON
 // -----------------------------------------------------------------------------
 type ReportFormatterJSON struct {
-
 }
 
 func (self ReportFormatterJSON) Format(report Report) string {
@@ -195,7 +191,6 @@ func CreateReportFormatter(format string) ReportFormatter {
 	}
 	return nil
 }
-
 
 // -----------------------------------------------------------------------------
 // Utils
