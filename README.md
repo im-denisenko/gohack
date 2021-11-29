@@ -1,5 +1,7 @@
 # GoHack
 
+[![Go](https://github.com/im-denisenko/gohack/actions/workflows/go.yml/badge.svg)](https://github.com/im-denisenko/gohack/actions/workflows/go.yml)
+
 # Установка
 
 ```
